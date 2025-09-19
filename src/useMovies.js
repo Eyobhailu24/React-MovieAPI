@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react";
-const Key="31ccb3d6";
 
 export function useMovies(query){
 
@@ -18,7 +17,10 @@ export function useMovies(query){
           try{
           setIsLoading(true);
           setError("")//to reset error thrown
-          const res=await fetch(`http://www.omdbapi.com/?apikey=${Key}&s=${query}`,{signal:controller.signal});
+          const res = await fetch(
+            `http://www.omdbapi.com/?apikey=${process.env.REACT_APP_OMDB_KEY}&s=${query}`,
+            { signal: controller.signal }
+          );
     
           if(!res.ok)
             throw new Error('Couldnot fetch data');
